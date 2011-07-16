@@ -1,0 +1,55 @@
+<!doctype html>
+<head>
+    <title>Matt can get you there in 15 minutes</title>
+    
+    <style type='text/css'>
+        * { font: 12pt Tahoma, Helvetica; }
+        .icon, #drive-time { width: 500px; margin: auto;}
+        .icon { background: url('car.jpg') 50% 50% no-repeat; }
+        .result { display: none; }
+        .speed { font-size: 120%; }
+    </style>
+
+    <script type="text/javascript">
+        function calculate() {
+            // Calculate the speed
+            $miles = intval($_GET['miles']);
+            $speed = round( $miles/.25 );
+            
+            // Show the result
+            var result = "Matt would have to drive <span style=''>" +
+                speed + " MPH</span> to go " + miles + " miles in 15 minutes.";
+            return false;
+        };
+    </script>
+</head>
+
+<body>
+    <div class="icon" />
+    <div id="drive-time">
+        <p>It seems that no matter where you are going, 
+            if you ask Matt how long it would take to get there, 
+            he would say 15 minutes.
+        </p>
+        
+        <p id="result"></p>
+
+        <p>Enter an amount of miles, and see how fast Matt would have to drive to get you there in 15 minutes.</p>
+
+        <form id="get-distance">
+            <input type='text' name='miles' value='<?php echo $miles; ?>' style='width: 300px' />
+            <button type='submit' style='width: 80px; margin-left: 20px;'>Get me there in 15 minutes</button>
+        </form>
+
+    </div>
+    
+    <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')
+        $(document).ready(function() {
+            $('#get-distance').submit(calculate);
+        });
+    </script>
+</body>
+</html>
