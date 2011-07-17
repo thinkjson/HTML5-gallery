@@ -9,7 +9,7 @@
         #map { background-color: #999; position: fixed; top: 0; left: 0; width: 100%; height: 100%; }
         #drive-time { margin-top: 20%; background-color: #fff; opacity: .9; padding: 10px; }
         .icon { background: url('car.jpg') 50% 50% no-repeat; }
-        #result { display: none; font-style: italic; padding: 0 20px; color: #333; }
+        #result { display: none; font-style: italic; padding: 0 20px; color: #333; margin: 20px 0; }
         .speed { font-size: 200%; color: #A00; }
         #get-distance input { width: 100%; font-size: 16pt; }
     </style>
@@ -26,7 +26,7 @@
             // Show the result
             var result = "Matt would have to drive <span class='speed'>" +
                 speed + " MPH</span> to go " + miles + " miles in 15 minutes.";
-            $('#result').html(result).fadeIn();
+            $('#result').html(result).hide().fadeIn();
             return false;
         };
     </script>
@@ -41,8 +41,6 @@
             if you ask Matt how long it would take to get there, 
             he would say 15 minutes.
         </p>
-        
-        <p id="result"></p>
 
         <p>Enter an amount of miles, and see how fast Matt would have to drive to get you there in 15 minutes.</p>
 
@@ -50,6 +48,8 @@
             <input type='text' name='miles' />
             <input type='submit' value='Get me there in 15 minutes' />
         </form>
+        
+        <p id="result"></p>
 
     </div>
     
