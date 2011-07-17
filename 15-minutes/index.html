@@ -3,30 +3,40 @@
     <title>Matt can get you there in 15 minutes</title>
     
     <style type='text/css'>
-        * { font: 12pt Tahoma, Helvetica; }
-        .icon, #drive-time { width: 500px; margin: auto;}
+        * { font: 11pt "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Liberation Sans", Verdana, "Lucida Grande", sans-serif; }
+        p { margin-top: 0; }
+        body { max-width: 500px; margin: auto; }
+        #map { background-color: #999; position: fixed; top: 0; left: 0; width: 100%; height: 100%; }
+        #drive-time { margin-top: 20%; background-color: #fff; opacity: .9; padding: 10px; }
         .icon { background: url('car.jpg') 50% 50% no-repeat; }
-        .result { display: none; }
-        .speed { font-size: 120%; }
+        #result { display: none; font-style: italic; padding: 0 20px; color: #333; }
+        .speed { font-size: 120%; color: #900; }
+        #get-distance input { width: 100%; }
     </style>
 
     <script type="text/javascript">
-        function calculate() {
+        function calculate(event) {
+            // Don't let it actually submit
+            event.preventDefault();
+            
             // Calculate the speed
-            $miles = intval($_GET['miles']);
-            $speed = round( $miles/.25 );
+            var miles = parseInt($('#get-distance input[name="miles"]').val());
+            var speed = Math.round( miles / .25 );
             
             // Show the result
-            var result = "Matt would have to drive <span style=''>" +
+            var result = "Matt would have to drive <span class='speed'>" +
                 speed + " MPH</span> to go " + miles + " miles in 15 minutes.";
+            $('#result').html(result).fadeIn();
             return false;
         };
     </script>
 </head>
 
 <body>
-    <div class="icon" />
+    <div id="map"></div>
     <div id="drive-time">
+        <div class="icon"></div>
+        
         <p>It seems that no matter where you are going, 
             if you ask Matt how long it would take to get there, 
             he would say 15 minutes.
@@ -37,8 +47,8 @@
         <p>Enter an amount of miles, and see how fast Matt would have to drive to get you there in 15 minutes.</p>
 
         <form id="get-distance">
-            <input type='text' name='miles' value='<?php echo $miles; ?>' style='width: 300px' />
-            <button type='submit' style='width: 80px; margin-left: 20px;'>Get me there in 15 minutes</button>
+            <input type='text' name='miles' />
+            <input type='submit' value='Get me there in 15 minutes' />
         </form>
 
     </div>

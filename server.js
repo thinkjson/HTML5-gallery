@@ -3,4 +3,6 @@ var app = express.createServer();
 
 app.use(express['static'](__dirname));
 
-app.listen(80);
+// app.listen(80);
+
+exports.app = app;
